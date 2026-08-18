@@ -10,9 +10,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /backend
 
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --prefer-dist
+RUN composer install --no-interaction --prefer-dist --no-scripts
 
 COPY . .
+RUN composer dump-autoload --optimize
 
 EXPOSE 8000
 
