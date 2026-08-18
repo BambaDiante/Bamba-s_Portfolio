@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /backend/database/database.sqlite
+    volumes:
+      - ./backend:/backend
+      - backend_vendor:/backend/vendor
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/frontend
+      - frontend_node_modules:/frontend/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  backend_vendor:
+  frontend_node_modules:
