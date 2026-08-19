@@ -16,10 +16,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->updateOrInsert(
-            ['email' => 'admin@example.com'],
+            ['email' => 'bambadiante@gmail.com'],
             [
-                'name' => 'Bamba Diante',
+                'name' => ' Ahmadou Bamba Diante',
                 'password' => bcrypt('admin123!'),
+                'bio'=>'Développeur Full Stack passionné
+                    par la conception et le développement d\'applications
+                    web performantes, sécurisées et évolutives. Curieux et motivé,
+                    j\'apprends continuellement de nouvelles technologies afin
+                    de relever des défis techniques et de contribuer 
+                    efficacement à des projets innovants',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
