@@ -18,7 +18,8 @@ function About(){
 
      return (
             <section>
-                <h1>A propos de moi</h1>
+                <h2>A propos de moi</h2>
+                <br />
                 <p>
                     {bio}
                 </p>

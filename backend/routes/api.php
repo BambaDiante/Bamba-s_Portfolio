@@ -14,5 +14,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::get('/projects', [ProjectsController::class, 'index']);
 Route::get('/competences',[CompetenceController::class,'index']);
 Route::get('/about',[AdminController::class,'getbio']);
+Route::get('/parcours',[AdminController::class,'getparcours']);
 
 require __DIR__.'/auth.php';

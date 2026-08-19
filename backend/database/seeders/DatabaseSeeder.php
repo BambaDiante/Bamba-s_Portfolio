@@ -30,6 +30,16 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         );
+        DB::table('experiences')->updateOrInsert(
+            [
+                'Institut'=>'Universities Cheikh Anta Diop de Dakar',
+                'description'=>'Licence en informatique a la section informatique.
+                    Competences apprises:development web,development
+                    mobile,reseau,development logiciel,
+                    cybersécurité',
+                'duree'=>'Trois ans'
+            ],
+            );
 
         DB::table('categorie_skills')->updateOrInsert(
             ['nom' => 'Frontend'],
