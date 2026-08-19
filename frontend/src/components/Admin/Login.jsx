@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api, { getCsrfCookie } from '../services/api';
+import api, { getCsrfCookie } from '../../services/api';
 
-function AdminLogin() {
+function Login() {
     const navigate = useNavigate();
-    const [form, setForm] = useState({ email: 'admin@example.com', password: 'admin123!' });
+    const [form, setForm] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     function handleChange(event) {
-        setForm({ ...form, [event.target.name]: event.target.value });
+        setForm({
+            ...form, 
+            [event.target.name]: event.target.value 
+        });
     }
 
     async function handleSubmit(event) {
@@ -19,10 +22,12 @@ function AdminLogin() {
 
         try {
             await getCsrfCookie();
-            await api.post('/admin/login', form);
+            await api.post('/login', form);
             navigate('/admin');
         } catch (requestError) {
             setError(requestError.response?.data?.message ?? 'Connexion impossible.');
+            //le .? signifie accede a l'element si ce qui se trouve a gauche n'est pas null
+            //et existe
         } finally {
             setIsSubmitting(false);
         }
@@ -43,7 +48,6 @@ function AdminLogin() {
                         type="email"
                         value={form.email}
                         onChange={handleChange}
-                        autoComplete="email"
                         required
                     />
 
@@ -54,7 +58,6 @@ function AdminLogin() {
                         type="password"
                         value={form.password}
                         onChange={handleChange}
-                        autoComplete="current-password"
                         required
                     />
 
@@ -71,4 +74,4 @@ function AdminLogin() {
     );
 }
 
-export default AdminLogin;
+export default Login;
