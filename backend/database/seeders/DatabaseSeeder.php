@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->updateOrInsert(
-            ['email' => 'test@example.com'],
+            ['email' => 'admin@example.com'],
             [
-                'name' => 'Test User',
-                'password' => bcrypt('password'),
+                'name' => 'Bamba Diante',
+                'password' => bcrypt('admin123!'),
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -166,6 +166,149 @@ h2 {
   color: #a14e3d;
 }
 
+.admin-link,
+.back-link {
+  display: inline-block;
+  margin-top: 28px;
+  color: #263d32;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.auth-page,
+.admin-page {
+  min-height: 100svh;
+  padding: 64px clamp(20px, 6vw, 96px);
+  background: radial-gradient(circle at 10% 8%, #d4e6d9 0, transparent 28%), #f3f0e8;
+}
+
+.auth-panel {
+  width: min(100%, 520px);
+  margin: 8vh auto 0;
+  padding: clamp(28px, 5vw, 56px);
+  background: #fffdf8;
+  border: 1px solid #c8d0c7;
+  box-shadow: 12px 12px 0 #cbdacb;
+}
+
+.auth-panel h1,
+.admin-header h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: .92;
+}
+
+.auth-intro {
+  max-width: 360px;
+  color: #63736a;
+  line-height: 1.55;
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.auth-form label {
+  margin-top: 8px;
+  color: #263d32;
+  font: 500 12px 'DM Mono', monospace;
+  text-transform: uppercase;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 13px 14px;
+  color: #17201c;
+  background: #f3f0e8;
+  border: 1px solid #b8c2b8;
+  outline: none;
+}
+
+.auth-form input:focus {
+  border-color: #263d32;
+  box-shadow: 0 0 0 3px #d4e6d9;
+}
+
+.auth-form button,
+.logout-button {
+  padding: 13px 16px;
+  color: #fffdf8;
+  background: #263d32;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.auth-form button {
+  margin-top: 18px;
+}
+
+.auth-form button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.auth-error {
+  margin: 12px 0 0;
+  color: #a14e3d;
+  font-size: 14px;
+}
+
+.admin-page {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.admin-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #b8c2b8;
+}
+
+.admin-header h1 {
+  max-width: 720px;
+  margin-bottom: 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 48px;
+}
+
+.admin-card {
+  min-height: 230px;
+  padding: 28px;
+  background: #dce8de;
+  border: 1px solid #b8cbb9;
+}
+
+.admin-card h2 {
+  margin: 20px 0 12px;
+}
+
+.admin-card p:not(.eyebrow) {
+  max-width: 340px;
+  color: #536159;
+  line-height: 1.55;
+}
+
+.admin-status {
+  display: inline-block;
+  margin-top: 18px;
+  color: #63736a;
+  font: 12px 'DM Mono', monospace;
+  text-transform: uppercase;
+}
+
 .skills-section {
   padding-top: 92px;
 }
@@ -257,6 +400,25 @@ h2 {
   }
 
   .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-page,
+  .admin-page {
+    padding: 28px 18px 64px;
+  }
+
+  .auth-panel {
+    margin-top: 4vh;
+    box-shadow: 7px 7px 0 #cbdacb;
+  }
+
+  .admin-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .admin-grid {
     grid-template-columns: 1fr;
   }
 

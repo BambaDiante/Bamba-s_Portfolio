@@ -11,3 +11,9 @@ const api = axios.create({
 });
 
 export default api;
+
+export function getCsrfCookie() {
+    return axios.get("http://localhost:8000/sanctum/csrf-cookie", {
+        withCredentials: true,
+    });
+}
