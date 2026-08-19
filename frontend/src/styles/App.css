@@ -12,8 +12,39 @@
 }
 
 .portfolio-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 24vw, 320px);
+  align-items: end;
+  gap: clamp(20px, 4vw, 56px);
   padding: 30px 0 90px;
   border-bottom: 1px solid #b8c2b8;
+}
+
+.portfolio-header-copy {
+  min-width: 0;
+}
+
+.portfolio-header-portrait {
+  justify-self: end;
+}
+
+.profile-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid #c8d0c7;
+  box-shadow: 12px 12px 0 #cbdacb;
+  opacity: 0;
+  transform: translateY(56px);
+  animation: profile-rise .85s cubic-bezier(.17, .84, .44, 1) .15s forwards;
+}
+
+@keyframes profile-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .eyebrow,
@@ -466,7 +497,13 @@ h2 {
   }
 
   .portfolio-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
     padding: 24px 0 58px;
+  }
+
+  .portfolio-header-portrait {
+    width: min(58vw, 220px);
   }
 
   .intro {
@@ -538,5 +575,13 @@ h2 {
 
   .project-content h3 {
     font-size: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-image {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
