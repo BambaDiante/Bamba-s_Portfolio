@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,11 +15,71 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        DB::table('users')->updateOrInsert(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => bcrypt('password'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        DB::table('categorie_skills')->updateOrInsert(
+            ['nom' => 'Frontend'],
+            ['icone' => 'code'],
+        );
+
+        DB::table('categorie_skills')->updateOrInsert(
+            ['nom' => 'Backend'],
+            ['icone' => 'server'],
+        );
+
+        $frontendId = DB::table('categorie_skills')->where('nom', 'Frontend')->value('id');
+        $backendId = DB::table('categorie_skills')->where('nom', 'Backend')->value('id');
+
+        foreach ([
+            ['name' => 'HTML', 'category_id' => $frontendId],
+            ['name' => 'Bootstrap', 'category_id' => $frontendId],
+            ['name' => 'React', 'category_id' => $frontendId],
+            ['name' => 'JavaScript', 'category_id' => $frontendId],
+            ['name' => 'CSS', 'category_id' => $frontendId],
+            ['name' => 'Laravel', 'category_id' => $backendId],
+            ['name' => 'PHP', 'category_id' => $backendId],
+            ['name' => 'SQLite', 'category_id' => $backendId],
+        ] as $skill) {
+            DB::table('skills')->updateOrInsert(
+                ['name' => $skill['name']],
+                ['category_id' => $skill['category_id']],
+            );
+        }
+
+        DB::table('projects')->updateOrInsert(
+            ['slug' => 'portfolio-modulaire'],
+            [
+                'title' => 'Portfolio modulaire',
+                'description' => 'Une expérience portfolio construite avec React, Laravel et SQLite.',
+                'image_path' => null,
+                'url' => 'http://localhost:5173',
+                'is_featured' => true,
+                'published_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('projects')->updateOrInsert(
+            ['slug' => 'application-de-gestion'],
+            [
+                'title' => 'Application de gestion',
+                'description' => 'Une interface claire pour organiser des données et suivre les actions importantes.',
+                'image_path' => null,
+                'url' => null,
+                'is_featured' => false,
+                'published_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
     }
 }

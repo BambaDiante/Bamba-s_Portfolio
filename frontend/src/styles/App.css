@@ -5,7 +5,8 @@
 }
 
 .portfolio-header,
-.projects-section {
+.projects-section,
+.skills-section {
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -165,6 +166,69 @@ h2 {
   color: #a14e3d;
 }
 
+.skills-section {
+  padding-top: 92px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.skills-category {
+  min-height: 190px;
+  padding: 24px;
+  background: #dce8de;
+  border: 1px solid #b8cbb9;
+}
+
+.skills-category-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #b8cbb9;
+}
+
+.skills-category h3 {
+  margin: 0;
+  color: #17201c;
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+
+.skill-category-icon {
+  color: #a14e3d;
+  font: 500 16px 'DM Mono', monospace;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.skills-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  color: #263d32;
+  background: #fffdf8;
+  border: 1px solid #c8d0c7;
+  font-size: 13px;
+}
+
+.skills-list img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
 @media (max-width: 760px) {
   .portfolio {
     padding: 28px 18px 64px;
@@ -185,6 +249,14 @@ h2 {
   }
 
   .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-section {
+    padding-top: 64px;
+  }
+
+  .skills-grid {
     grid-template-columns: 1fr;
   }
 

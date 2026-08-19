@@ -49,7 +49,11 @@ function Projet() {
                                     <p className="project-description">{project.description}</p>
                                     <div className="project-footer">
                                         <span className="project-stack">{stack}</span>
-                                        {project.demo_url && <a href={project.demo_url} target="_blank" rel="noreferrer">Voir le projet</a>}
+                                        {(project.demo_url ?? project.url) && (
+                                            <a href={project.demo_url ?? project.url} target="_blank" rel="noreferrer">
+                                                Voir le projet
+                                            </a>
+                                        )}
                                     </div>
                                 </div>
                             </article>

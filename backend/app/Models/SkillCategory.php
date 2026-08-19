@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SkillCategory extends Model
 {
-    protected $fillable = ['name', 'icon_path'];
+    protected $table = 'categorie_skills';
+
+    protected $fillable = ['nom', 'icone'];
 
     public function skills(): HasMany
     {
