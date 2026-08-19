@@ -5,6 +5,7 @@ import Competences from './components/Competences.jsx'
 import Header from './components/Header.jsx'
 import About from './components/About.jsx'
 import Parcours from './components/Parcours.jsx'
+import Contact from './components/Contact.jsx'
 import Login from './components/Admin/Login.jsx'
 import AdminDashboard from './components/Admin/Dashboard.jsx'
 
@@ -16,6 +17,7 @@ function Portfolio() {
       <Parcours/>
       <Projet />
       <Competences />
+      <Contact/>
     </main>
   )
 }

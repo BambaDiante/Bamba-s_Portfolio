@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\CompetenceController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
+
 
 
 
@@ -15,5 +17,6 @@ Route::get('/projects', [ProjectsController::class, 'index']);
 Route::get('/competences',[CompetenceController::class,'index']);
 Route::get('/about',[AdminController::class,'getbio']);
 Route::get('/parcours',[AdminController::class,'getparcours']);
+Route::post('/contact',[ContactController::class,'store']);
 
 require __DIR__.'/auth.php';
