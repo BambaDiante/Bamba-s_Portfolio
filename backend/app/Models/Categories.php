@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Experience extends Model
+class Categories extends Model
 {
     protected $fillable = [
-        'Institut',
-        'description',
-        'duree'
+        'nom',
+        'icone',
+        
     ];
-
 }

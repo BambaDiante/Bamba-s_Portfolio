@@ -19,14 +19,7 @@ class Project extends Model
         'published_at',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'is_featured' => 'boolean',
-            'published_at' => 'datetime',
-        ];
-    }
-
+   
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
