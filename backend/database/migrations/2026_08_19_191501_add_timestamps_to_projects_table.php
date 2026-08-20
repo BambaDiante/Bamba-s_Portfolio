@@ -11,11 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('icon_path')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+        Schema::table('projects', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -23,8 +19,10 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    // public function down(): void
-    // {
-    //     Schema::dropIfExists('skills');
-    // }
+    public function down(): void
+    {
+        Schema::table('projects', function (Blueprint $table) {
+            //
+        });
+    }
 };

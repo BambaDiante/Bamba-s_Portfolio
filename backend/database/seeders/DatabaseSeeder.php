@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ],
         );
+        
         DB::table('experiences')->updateOrInsert(
             [
                 'Institut'=>'Universities Cheikh Anta Diop de Dakar',
@@ -39,7 +40,7 @@ class DatabaseSeeder extends Seeder
                     cybersécurité',
                 'duree'=>'Trois ans'
             ],
-            );
+        );
 
         DB::table('categorie_skills')->updateOrInsert(
             ['nom' => 'Frontend'],
@@ -70,31 +71,23 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        // --- PARTIE PROJETS ADAPTÉE ---
+        
         DB::table('projects')->updateOrInsert(
-            ['slug' => 'portfolio-modulaire'],
+            ['nom' => 'Portfolio modulaire'], // Identification par le nom maintenant
             [
-                'title' => 'Portfolio modulaire',
                 'description' => 'Une expérience portfolio construite avec React, Laravel et SQLite.',
-                'image_path' => null,
-                'url' => 'http://localhost:5173',
-                'is_featured' => true,
-                'published_at' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'projects_image' => null,
+                'stack' => json_encode(['React', 'Laravel', 'SQLite']), // Stockage en JSON
             ],
         );
 
         DB::table('projects')->updateOrInsert(
-            ['slug' => 'application-de-gestion'],
+            ['nom' => 'Application de gestion'],
             [
-                'title' => 'Application de gestion',
                 'description' => 'Une interface claire pour organiser des données et suivre les actions importantes.',
-                'image_path' => null,
-                'url' => null,
-                'is_featured' => false,
-                'published_at' => now(),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'projects_image' => null,
+                'stack' => null,
             ],
         );
     }

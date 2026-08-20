@@ -17,8 +17,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
-    {
-        Schema::dropIfExists('experiences');
-    }
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('experiences');
+    // }
 };

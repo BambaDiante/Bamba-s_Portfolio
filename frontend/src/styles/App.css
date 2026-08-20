@@ -482,7 +482,8 @@ h2 {
 }
 
 .form button:hover:not(:disabled) {
-  background: #a14e3d;
+  background: #cbdacb;
+  color:#263d32;
   transform: translateY(-2px);
 }
 

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('projects', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string("description");
             $table->string("projects_image");
-            $table->string("stack");
+            $table->json('stack')->nullable();
         });
     }
 
@@ -26,7 +26,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            //
+            // Note: On ne peut pas supprimer un $table->id() facilement avec dropColumn, 
+            // mais comme 'projects' a déjà sa propre table de base, on supprime les colonnes ajoutées :
+            $table->dropColumn(['nom', 'description', 'projects_image', 'stack']);
+            
+            // Si l'id a été recréé par erreur en tant que colonne supplémentaire :
+            // $table->dropColumn('id');
         });
     }
 };

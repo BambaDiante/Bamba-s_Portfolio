@@ -9,14 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Project extends Model
 {
     protected $fillable = [
-        'title',
-        'slug',
+        'nom',
         'description',
-        'image_path',
-        'repository_url',
-        'demo_url',
-        'is_featured',
-        'published_at',
+        'projects_image',
+        'skills',
+        'timestamps'
     ];
 
    

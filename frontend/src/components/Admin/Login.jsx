@@ -23,7 +23,7 @@ function Login() {
         try {
             await getCsrfCookie();
             await api.post('/login', form);
-            navigate('/admin');
+            navigate('/admin/dashboard');
         } catch (requestError) {
             setError(requestError.response?.data?.message ?? 'Connexion impossible.');
             //le .? signifie accede a l'element si ce qui se trouve a gauche n'est pas null

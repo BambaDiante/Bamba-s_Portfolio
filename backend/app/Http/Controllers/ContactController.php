@@ -26,5 +26,10 @@ class ContactController extends Controller
         ]);
 
         return response()->json(['message' => 'Message envoyé.'], 201);
-    }    
+    }
+    
+    public function getMessage(){
+        $message=Message::all();
+        return response()->json($message,200);
+    }
 }

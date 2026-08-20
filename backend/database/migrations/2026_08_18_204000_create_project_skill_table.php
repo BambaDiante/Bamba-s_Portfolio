@@ -15,8 +15,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
-    {
-        Schema::dropIfExists('project_skill');
-    }
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('project_skill');
+    // }
 };

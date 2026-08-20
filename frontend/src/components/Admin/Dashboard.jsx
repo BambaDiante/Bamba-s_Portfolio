@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
+import Projet from '../Projet';
+import Competences from '../Competences';
+import Parcours from '../Parcours';
+import About from '../About';
+import CreateProjet from './AdminProjet';
 
 function AdminDashboard() {
     const navigate = useNavigate();
@@ -8,7 +13,7 @@ function AdminDashboard() {
     const [status, setStatus] = useState('loading');
 
     useEffect(() => {
-        api.get('/admin/me')
+        api.get('/user')
             .then((response) => {
                 setUser(response.data);
                 setStatus('ready');
@@ -19,7 +24,7 @@ function AdminDashboard() {
     }, [navigate]);
 
     async function handleLogout() {
-        await api.post('/admin/logout');
+        await api.post('/logout');
         navigate('/admin/login', { replace: true });
     }
 
@@ -36,20 +41,9 @@ function AdminDashboard() {
                 </div>
                 <button className="logout-button" type="button" onClick={handleLogout}>Se déconnecter</button>
             </header>
-            <section className="admin-grid">
-                <article className="admin-card">
-                    <p className="eyebrow">Contenu</p>
-                    <h2>Projets</h2>
-                    <p>Ajoute et organise les projets affichés sur ton portfolio.</p>
-                    <span className="admin-status">Bientôt disponible</span>
-                </article>
-                <article className="admin-card">
-                    <p className="eyebrow">Profil</p>
-                    <h2>Compétences</h2>
-                    <p>Gère les technologies et les catégories présentées aux visiteurs.</p>
-                    <span className="admin-status">Bientôt disponible</span>
-                </article>
-            </section>
+            <About/>
+            <CreateProjet/>
+            <Competences/>
             <Link className="back-link" to="/">Voir le portfolio</Link>
         </main>
     );
