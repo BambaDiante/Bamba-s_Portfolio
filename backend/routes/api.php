@@ -20,11 +20,12 @@ Route::get('/parcours',[AdminController::class,'getparcours']);
 Route::post('/contact',[ContactController::class,'store']);
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/messages',[ContactController::class,'getMessage']);
-    Route::post('/create/project',[ProjectsController::class,'store']);
-    Route::post('/create/category',[CompetenceController::class,'catstore']);
-    Route::post('/create/skill',[CompetenceController::class,'skillstore']);
-
+    Route::get('/messages', [ContactController::class, 'getMessage']);
+    Route::post('/create/project', [ProjectsController::class, 'store']);
+    Route::put('/project/{id}', [ProjectsController::class, 'update']);
+    Route::delete('/project/{id}', [ProjectsController::class, 'destroy']);
+    Route::post('/create/category', [CompetenceController::class, 'catstore']);
+    Route::post('/create/skill', [CompetenceController::class, 'skillstore']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
