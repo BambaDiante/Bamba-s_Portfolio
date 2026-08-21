@@ -1,0 +1,22 @@
+# Node
+node_modules/
+frontend/node_modules/
+
+# Laravel
+backend/vendor/
+backend/.env
+
+# Laravel generated files
+backend/storage/logs/
+backend/storage/framework/cache/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+
+# SQLite
+backend/database/*.sqlite
+backend/database/*.sqlite-journal
+
+# Build
+frontend/dist/
+backend/build/
+

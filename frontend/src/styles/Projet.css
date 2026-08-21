@@ -189,3 +189,44 @@
 .feedback-error {
   color: #a14e3d;
 }
+.icon-button {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 7px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.icon-button:hover {
+    transform: translateY(-1px);
+}
+
+.edit-button {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.edit-button:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.delete-button {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.delete-button:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+}
