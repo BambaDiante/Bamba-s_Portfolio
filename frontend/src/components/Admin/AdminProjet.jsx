@@ -8,12 +8,12 @@ export default function CreateProjet() {
     const [isSending, setIsSending] = useState(false);
     const [error, setError] = useState('');
 
-    // État du formulaire
+  
     const [form, setForm] = useState({ 
         nom: '', 
         description: '',
         project_image: null, 
-        skills: []          // Stockera les ID des compétences sélectionnées
+        skills: []          
     });
 
     // Charger les compétences au montage du composant

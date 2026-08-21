@@ -22,6 +22,9 @@ Route::post('/contact',[ContactController::class,'store']);
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/messages',[ContactController::class,'getMessage']);
     Route::post('/create/project',[ProjectsController::class,'store']);
+    Route::post('/create/category',[CompetenceController::class,'catstore']);
+    Route::post('/create/skill',[CompetenceController::class,'skillstore']);
+
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

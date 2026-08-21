@@ -6,6 +6,7 @@ import Competences from '../Competences';
 import Parcours from '../Parcours';
 import About from '../About';
 import CreateProjet from './AdminProjet';
+import AdminCompetences from './AdminCompetences';
 
 function AdminDashboard() {
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ function AdminDashboard() {
             </header>
             <About/>
             <CreateProjet/>
-            <Competences/>
+            <AdminCompetences/>
             <Link className="back-link" to="/">Voir le portfolio</Link>
         </main>
     );

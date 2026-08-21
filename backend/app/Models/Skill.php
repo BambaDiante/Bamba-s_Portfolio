@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Skill extends Model
 {
+    protected $table = 'skills';
+
     protected $fillable = ['name', 'icon_path', 'category_id'];
 
     public function category(): BelongsTo
