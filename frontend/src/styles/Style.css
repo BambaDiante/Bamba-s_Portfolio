@@ -124,3 +124,28 @@ h3{
     color: var(--color-title);
     transform: translateY(-2px);
 }
+h2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text-title);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+    margin-left:20px;
+}
+
+h2::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-title);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.bio{
+    margin-left:15px;
+}

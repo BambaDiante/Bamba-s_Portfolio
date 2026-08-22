@@ -19,10 +19,10 @@ function About(){
      return (
             <section>
                 <h2>A propos de moi</h2>
-                <br />
-                <p>
+                <p className='bio'>
                     {bio}
                 </p>
+                <br />
             </section>
         )
 
