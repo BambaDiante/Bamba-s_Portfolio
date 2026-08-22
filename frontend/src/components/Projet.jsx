@@ -57,7 +57,7 @@ function Projet() {
                                     {image ? (
                                         <img src={image} alt={`Aperçu de ${title}`} />
                                     ) : (
-                                        <span>PROJET</span>
+                                        <span className='nopic'>Sans images</span>
                                     )}
                                 </div>
                                 <div className="project-content">

@@ -26,7 +26,6 @@ function Competences() {
         <section className="skills-section" aria-labelledby="skills-title">
             <div className="section-heading">
                 <div>
-                    <p className="eyebrow">Boîte à outils</p>
                     <h2 id="skills-title">Mes compétences</h2>
                 </div>
                 <span className="project-count">{skillCount.toString().padStart(2, '0')} compétences</span>
