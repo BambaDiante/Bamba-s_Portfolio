@@ -53,6 +53,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Portfolio />} />
+        <Route path="/Projet" element={<Projet/>}/>
+        <Route path="/Contact" element={<Contact/>}/>
         <Route path="/admin/login" element={<Login />} />
         <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
         <Route
