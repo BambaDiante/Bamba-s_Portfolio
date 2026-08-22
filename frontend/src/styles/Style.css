@@ -1,0 +1,938 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* =========================================================
+   1. TOKENS — palette, rayons, ombres, typo
+   Le thème sombre surcharge ces variables via [data-theme="dark"]
+   et via prefers-color-scheme (si l'utilisateur n'a rien choisi).
+   ========================================================= */
+
+:root {
+  /* Fonds */
+  --color-bg: #f3f0e8;
+  --color-bg-radial: #d4e6d9;
+  --color-surface: #fffdf8;
+  --color-surface-muted: #dce8de;
+
+  /* Bordures */
+  --color-border: #c8d0c7;
+  --color-border-strong: #b8c2b8;
+  --color-border-muted: #b8cbb9;
+
+  /* Texte */
+  --color-text: #17201c;
+  --color-text-muted: #63736a;
+  --color-text-subtle: #536159;
+
+  /* Marque */
+  --color-primary: #263d32;
+  --color-primary-contrast: #fffdf8;
+  --color-accent: #a14e3d;
+
+  /* Effets */
+  --color-shadow-tint: #cbdacb;
+  --color-focus-ring: #d4e6d9;
+
+  /* Rayons */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+
+  /* Ombres "brutalistes" signature du site */
+  --shadow-lg: 12px 12px 0 var(--color-shadow-tint);
+  --shadow-md: 10px 10px 0 var(--color-shadow-tint);
+  --shadow-sm: 7px 7px 0 var(--color-shadow-tint);
+
+  /* Typo */
+  --font-display: 'Manrope', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* Transitions communes */
+  --ease-standard: cubic-bezier(.17, .84, .44, 1);
+
+  color-scheme: light;
+}
+
+/* Thème sombre : suit le système par défaut... */
+/* @media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #12180f;
+    --color-bg-radial: #1d2a1e;
+    --color-surface: #1a211a;
+    --color-surface-muted: #212b21;
+
+    --color-border: #313e30;
+    --color-border-strong: #3a463a;
+    --color-border-muted: #354235;
+
+    --color-text: #f1efe6;
+    --color-text-muted: #9aa89b;
+    --color-text-subtle: #b3c0b1;
+
+    --color-primary: #cfe3d1;
+    --color-primary-contrast: #12180f;
+    --color-accent: #e2836f;
+
+    --color-shadow-tint: #263626;
+    --color-focus-ring: #2a3a29;
+
+    color-scheme: dark;
+  }
+} */
+
+/* ...mais un toggle explicite (data-theme sur <html>) l'emporte toujours */
+[data-theme='dark'] {
+  --color-bg: #12180f;
+  --color-bg-radial: #1d2a1e;
+  --color-surface: #1a211a;
+  --color-surface-muted: #212b21;
+
+  --color-border: #313e30;
+  --color-border-strong: #3a463a;
+  --color-border-muted: #354235;
+
+  --color-text: #f1efe6;
+  --color-text-muted: #9aa89b;
+  --color-text-subtle: #b3c0b1;
+
+  --color-primary: #cfe3d1;
+  --color-primary-contrast: #12180f;
+  --color-accent: #e2836f;
+
+  --color-shadow-tint: #263626;
+  --color-focus-ring: #2a3a29;
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+   2. RESET & BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  transition: background-color .3s ease, color .3s ease;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+h1, h2, h3, p {
+  margin-top: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================
+   3. LAYOUT PARTAGÉ (portfolio / auth / admin)
+   ========================================================= */
+
+.portfolio,
+.auth-page,
+.admin-page {
+  min-height: 100svh;
+  background: radial-gradient(circle at 92% 8%, var(--color-bg-radial) 0, transparent 28%), var(--color-bg);
+}
+
+.portfolio {
+  padding: 64px clamp(20px, 6vw, 96px) 96px;
+}
+
+.auth-page,
+.admin-page {
+  padding: 64px clamp(20px, 6vw, 96px);
+}
+
+.portfolio-header,
+.projects-section,
+.skills-section {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.admin-page {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   4. EN-TÊTE PORTFOLIO
+   ========================================================= */
+
+.portfolio-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 24vw, 320px);
+  align-items: end;
+  gap: clamp(20px, 4vw, 56px);
+  padding: 30px 0 90px;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.portfolio-header-copy {
+  min-width: 0;
+}
+
+.portfolio-header-portrait {
+  justify-self: end;
+}
+
+.profile-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  filter: drop-shadow(var(--shadow-lg));
+  opacity: 0;
+  transform: translateY(56px);
+  animation: profile-rise .85s var(--ease-standard) .15s forwards;
+}
+
+@keyframes profile-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  max-width: 780px;
+  margin: 20px 0 18px;
+  color: var(--color-text);
+  font-size: clamp(48px, 9vw, 128px);
+  line-height: .88;
+  letter-spacing: -.07em;
+}
+
+.intro {
+  max-width: 430px;
+  margin-bottom: 0;
+  color: var(--color-text-subtle);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   5. TEXTES UTILITAIRES (eyebrow, index, count)
+   ========================================================= */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 6px;
+  color: var(--color-text-muted);
+  font: 500 12px/1.2 var(--font-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.project-index,
+.project-count {
+  margin: 0;
+  color: var(--color-text-muted);
+  font: 500 12px/1.2 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   6. SECTION PROJETS
+   ========================================================= */
+
+.projects-section {
+  padding-top: 58px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+h2 {
+  margin: 12px 0 0;
+  color: var(--color-text);
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+
+.project-count {
+  padding-bottom: 5px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.project-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  overflow: hidden;
+  color: var(--color-surface-muted);
+  background: var(--color-primary);
+  font: 500 13px var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.project-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.project-card:hover .project-visual img {
+  transform: scale(1.06);
+}
+
+.project-content {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  padding: 22px 22px 24px;
+}
+
+.project-content h3 {
+  margin: 0 0 10px;
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.project-description {
+  display: -webkit-box;
+  margin: 0 0 20px;
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-size: .875rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.project-footer {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.project-stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  color: var(--color-primary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: .72rem;
+  font-weight: 500;
+}
+
+.skill-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.stack-placeholder {
+  color: var(--color-text-muted);
+  font-size: .75rem;
+  font-style: italic;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-size: .85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap .2s ease, color .2s ease;
+}
+
+.project-link:hover {
+  gap: 10px;
+  color: var(--color-accent);
+}
+
+/* =========================================================
+   7. ÉTATS (chargement / erreur / liens de retour)
+   ========================================================= */
+
+.feedback {
+  padding: 32px 0;
+  color: var(--color-text-muted);
+  font-size: .9rem;
+}
+
+.feedback-error {
+  color: var(--color-accent);
+}
+
+.admin-link,
+.back-link {
+  display: inline-block;
+  margin-top: 28px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* =========================================================
+   8. AUTHENTIFICATION
+   ========================================================= */
+
+.auth-panel {
+  width: min(100%, 520px);
+  margin: 8vh auto 0;
+  padding: clamp(28px, 5vw, 56px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-panel h1,
+.admin-header h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: .92;
+}
+
+.auth-intro {
+  max-width: 360px;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.auth-form label {
+  margin-top: 8px;
+  color: var(--color-primary);
+  font: 500 12px var(--font-mono);
+  text-transform: uppercase;
+}
+
+.auth-error {
+  margin: 12px 0 0;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+/* =========================================================
+   9. CHAMPS DE FORMULAIRE (partagés auth + contact)
+   ========================================================= */
+
+.auth-form input,
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  outline: none;
+  font: inherit;
+  resize: vertical;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.auth-form input:focus,
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* =========================================================
+   10. BOUTONS PRIMAIRES
+   ========================================================= */
+
+.auth-form button,
+.logout-button,
+.form button {
+  padding: 13px 18px;
+  color: var(--color-primary-contrast);
+  background: var(--color-primary);
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background .2s ease, transform .2s ease, color .2s ease;
+}
+
+.auth-form button {
+  margin-top: 18px;
+}
+
+.form button {
+  width: 100%;
+  margin-top: 22px;
+}
+
+.auth-form button:hover:not(:disabled),
+.form button:hover:not(:disabled) {
+  background: var(--color-shadow-tint);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.auth-form button:disabled,
+.form button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+/* =========================================================
+   11. ADMIN
+   ========================================================= */
+
+.admin-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.admin-header h1 {
+  max-width: 720px;
+  margin-bottom: 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding-top: 48px;
+}
+
+.admin-card {
+  min-height: 230px;
+  padding: 28px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-md);
+}
+
+.admin-card h2 {
+  margin: 20px 0 12px;
+}
+
+.admin-card p:not(.eyebrow) {
+  max-width: 340px;
+  color: var(--color-text-subtle);
+  line-height: 1.55;
+}
+
+.admin-status {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--color-text-muted);
+  font: 12px var(--font-mono);
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   12. COMPÉTENCES
+   ========================================================= */
+
+.skills-section {
+  padding-top: 92px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.skills-category {
+  min-height: 190px;
+  padding: 24px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border-muted);
+  border-radius: var(--radius-md);
+}
+
+.skills-category-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.skills-category h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+
+.skill-category-icon {
+  color: var(--color-accent);
+  font: 500 16px var(--font-mono);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+.skills-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+}
+
+.skills-list img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   13. CONTACT
+   ========================================================= */
+
+.contact-section {
+  max-width: 780px;
+  margin: 92px auto 0;
+  padding: 34px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-section h3 {
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.contact-section > p {
+  margin-bottom: 30px;
+  color: var(--color-text-muted);
+}
+
+.form {
+  margin: 0;
+}
+
+.contact-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  color: var(--color-primary);
+  font: 500 12px var(--font-mono);
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   14. BOUTONS ICÔNES (édition / suppression)
+   ========================================================= */
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, transform .15s ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.edit-button {
+  color: var(--color-text-muted);
+  background: var(--color-surface-muted);
+}
+
+.edit-button:hover {
+  color: var(--color-text);
+  background: var(--color-border);
+}
+
+.delete-button {
+  color: var(--color-accent);
+  background: var(--color-surface-muted);
+}
+
+.delete-button:hover {
+  color: var(--color-accent);
+  background: var(--color-shadow-tint);
+}
+
+/* =========================================================
+   15. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .portfolio {
+    padding: 28px 18px 64px;
+  }
+
+  .portfolio-header {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px 0 58px;
+  }
+
+  .portfolio-header-portrait {
+    width: min(58vw, 220px);
+  }
+
+  .intro {
+    font-size: 16px;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+    margin-bottom: 22px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-section {
+    padding-top: 64px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section {
+    margin-top: 64px;
+    padding: 24px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field-full {
+    grid-column: auto;
+  }
+
+  .auth-page,
+  .admin-page {
+    padding: 28px 18px 64px;
+  }
+
+  .auth-panel {
+    margin-top: 4vh;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .admin-header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-content {
+    padding: 18px;
+  }
+
+  .project-content h3 {
+    font-size: 21px;
+  }
+}
+
+/* =========================================================
+   16. ACCESSIBILITÉ
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-image {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .project-card,
+  .project-visual img,
+  .project-link,
+  .icon-button,
+  .auth-form button,
+  .form button {
+    transition: none;
+  }
+}
+
+/* Conteneur principal du footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem;
+  max-height:50px;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+@media (min-width: 640px) {
+  footer {
+    flex-direction: row;
+  }
+}
+
+/* Texte de copyright */
+footer p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* Conteneur des liens d'icônes */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .footer-socials {
+    margin-top: 0;
+  }
+}
+
+/* Style des liens / boutons d'icônes */
+.footer-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 6px);
+  color: var(--color-text, inherit);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-icon-link:hover {
+  border-color: var(--color-border-strong);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Taille des icônes SVG à l'intérieur */
+.footer-icon-link svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}

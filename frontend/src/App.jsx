@@ -1,4 +1,4 @@
-import './styles/App.css'
+import './styles/Style.css'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Projet from './components/Projet.jsx'

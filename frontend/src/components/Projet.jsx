@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
-import '../styles/Projet.css'; // Assurez-vous d'importer le CSS
+import '../styles/Projet.css'; 
 
 function Projet() {
     const [projects, setProjects] = useState([]);
