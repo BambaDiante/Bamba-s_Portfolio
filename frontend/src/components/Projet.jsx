@@ -96,6 +96,7 @@ function Projet() {
                     })}
                 </div>
             )}
+            <br />
         </section>
     );
 }
