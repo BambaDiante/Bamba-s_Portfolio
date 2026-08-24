@@ -13,5 +13,7 @@ const api = axios.create({
 export default api;
 
 export function getCsrfCookie() {
-    return api.get("/sanctum/csrf-cookie");
+    return axios.get("https://bambadiante-backend.onrender.com/sanctum/csrf-cookie", {
+        withCredentials: true,
+    });
 }
