@@ -20,11 +20,10 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        env('FRONTEND_URL', 'http://localhost:3000'),
+        env('FRONTEND_URL', 'https://bambadiante-frontend.onrender.com'),
+        'https://bambadiante-frontend.onrender.com',
         'http://localhost:5173',
         'http://127.0.0.1:5173',
-        'http://localhost:5175',
-        'http://127.0.0.1:5175',
     ],
 
     'allowed_origins_patterns' => [],
