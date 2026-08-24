@@ -21,7 +21,7 @@ services:
       - key: SANCTUM_STATEFUL_DOMAINS
         value: bambadiante-frontend.onrender.com
       - key: SESSION_DOMAIN
-        value: .onrender.com
+        value: null
       - key: SESSION_DRIVER
         value: database
       - key: SESSION_LIFETIME
