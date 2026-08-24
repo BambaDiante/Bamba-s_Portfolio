@@ -1,5 +1,4 @@
 services:
-  # 1. Le Backend (Laravel via Docker)
   - type: web
     name: bambadiante-backend
     env: docker
@@ -7,20 +6,34 @@ services:
     dockerContext: ./backend
     plan: free
     envVars:
+      - key: APP_NAME
+        value: BambaDiante
       - key: APP_ENV
         value: production
-      - key: APP_DEBUG
-        value: false
       - key: APP_KEY
         value: base64:g/ziyIjNp6G6TIKb1kgO38yHKyKUH4y39BqWEcE6L8M=
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://bambadiante-backend.onrender.com
+      - key: FRONTEND_URL
+        value: https://bambadiante-frontend.onrender.com
+      - key: SANCTUM_STATEFUL_DOMAINS
+        value: bambadiante-frontend.onrender.com
+      - key: SESSION_DOMAIN
+        value: .onrender.com
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: 120
+      - key: SESSION_ENCRYPT
+        value: "false"
+      - key: SESSION_PATH
+        value: /
       - key: DB_CONNECTION
         value: sqlite
       - key: DB_DATABASE
         value: /backend/database/database.sqlite
-      - key: SANCTUM_STATEFUL_DOMAINS
-        value: bambadiante-frontend.onrender.com
-      - key: FRONTEND_URL
-        value: https://bambadiante-frontend.onrender.com
 
   # 2. Le Frontend (React en site statique)
   - type: web
