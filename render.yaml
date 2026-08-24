@@ -22,9 +22,10 @@ services:
       - key: FRONTEND_URL
         value: https://bambadiante-frontend.onrender.com
 
-# 2. Le Frontend (React en site statique)
+  # 2. Le Frontend (React en site statique)
   - type: web
     name: bambadiante-frontend
+    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
