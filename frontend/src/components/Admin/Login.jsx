@@ -15,23 +15,21 @@ function Login() {
         });
     }
 
-    async function handleSubmit(event) {
-        event.preventDefault();
-        setError('');
-        setIsSubmitting(true);
+   async function handleSubmit(event) {
+    event.preventDefault();
+    setError('');
+    setIsSubmitting(true);
 
-        try {
-            // await getCsrfCookie();
-            await api.post('/login', form);
-            navigate('/admin/dashboard');
-        } catch (requestError) {
-            setError(requestError.response?.data?.message ?? 'Connexion impossible.');
-            //le .? signifie accede a l'element si ce qui se trouve a gauche n'est pas null
-            //et existe
-        } finally {
-            setIsSubmitting(false);
-        }
+    try {
+        const response = await api.post('/login', form);
+        localStorage.setItem('auth_token', response.data.token); // <-- la ligne qui manquait
+        navigate('/admin/dashboard');
+    } catch (requestError) {
+        setError(requestError.response?.data?.message ?? 'Connexion impossible.');
+    } finally {
+        setIsSubmitting(false);
     }
+}
 
     return (
         <main className="auth-page">
