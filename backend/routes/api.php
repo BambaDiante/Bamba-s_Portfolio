@@ -35,6 +35,14 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::put('/skill/{id}', [CompetenceController::class, 'updateSkill']);
     Route::delete('/skill/{id}', [CompetenceController::class, 'destroySkill']);
 
+    //Test
+
+    Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok'
+    ]);
+});
+
 });
 
 require __DIR__.'/auth.php';
