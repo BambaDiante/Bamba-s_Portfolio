@@ -17,4 +17,4 @@ RUN composer dump-autoload --optimize
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "touch database/database.sqlite && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000 && php artisan db:seed DatabaseSeeder"]
+CMD ["sh", "-c", "touch database/database.sqlite && php artisan migrate --force && php artisan db:seed --force && php artisan serve --host=0.0.0.0 --port=8000"]
