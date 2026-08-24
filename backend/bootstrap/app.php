@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);
 
-        $middleware->statefulApi();
+        // statefulApi() retiré : on est en pur Bearer token, plus besoin du mode SPA/cookie/CSRF
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
