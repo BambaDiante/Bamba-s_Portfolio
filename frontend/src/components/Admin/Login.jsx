@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import api, { getCsrfCookie } from '../../services/api';
+import api from '../../services/api';
 
 function Login() {
     const navigate = useNavigate();

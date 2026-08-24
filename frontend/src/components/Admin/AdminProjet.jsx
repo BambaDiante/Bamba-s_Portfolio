@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import api, { getCsrfCookie } from '../../services/api';
+import api from '../../services/api';
 
 export default function CreateProjet() {
     const [skills, setSkills] = useState([]);

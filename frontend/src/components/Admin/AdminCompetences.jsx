@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import api, { getCsrfCookie } from '../../services/api';
+import api from '../../services/api';
 import { Pencil, Trash2 } from 'lucide-react';
 
 export default function CompetencesAdmin() {
