@@ -23,7 +23,7 @@ services:
         value: https://bambadiante-frontend.onrender.com
 
   # 2. Le Frontend (React en site statique)
-  - type: static
+  - type: web
     name: bambadiante-frontend
     env: static
     buildCommand: npm install && npm run build
