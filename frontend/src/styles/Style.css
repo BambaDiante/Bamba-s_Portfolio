@@ -9,6 +9,7 @@
     --color-profile-shadow:#1a1c3a;
     --color-input-bg:#0e0e14;
     --color-danger:#fca5a5;
+    --color-glow-purple:#4c1d95;
 }
 
 * {
@@ -46,7 +47,10 @@ header{
     width:100%;
 }
 .role{
-    color:var(--color-title);
+    background: linear-gradient(90deg, var(--color-title) 0%, #a855f7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size:clamp(2.2rem, 7vw, 6rem);
 }
 .portfolio-header-copy{
@@ -55,6 +59,7 @@ header{
     gap:10px;
     margin-left:30px;
     width:70%;
+    min-width: 0;
 }
 h3{
     color:var(--color-text-title);
@@ -62,12 +67,16 @@ h3{
 }
 .profile-image{
     filter: drop-shadow(12px 0px 120px var(--color-profile-shadow));
+    width: 100%;
     max-width: 100%;
+    height: auto;
     display: block;
 }
 .portfolio-header-portrait {
   position: relative;
   overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
 }
 .portfolio-header-portrait::before {
   content: '';
@@ -1196,24 +1205,40 @@ h2::before {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+    /*
+     * TABLETTE / PETITS ECRANS
+     * Le hero passe obligatoirement sur 2 lignes :
+     * 1. texte
+     * 2. image
+     */
     header {
+        display: flex;
         flex-direction: column;
+        width: 100%;
+        gap: 24px;
     }
+
     .portfolio-header-copy {
         width: 100%;
+        max-width: 100%;
+        min-width: 0;
         margin-left: 0;
         padding: 0 20px;
-        order: 2;
-    }
-    .portfolio-header-portrait {
         order: 1;
+    }
+
+    .portfolio-header-portrait {
+        order: 2;
         width: 100%;
-        max-height: 320px;
+        max-width: 100%;
+        min-width: 0;
+        max-height: 260px; /* etait 320px : prenait trop de place a l'ecran */
     }
     .portfolio-header-portrait img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center 15%; /* recadre vers le haut pour ne pas couper le visage */
     }
     .parcours-list {
         padding: 0 10px;
@@ -1279,12 +1304,42 @@ h2::before {
 }
 
 @media (max-width: 500px) {
+    /*
+     * MOBILE
+     * Toujours : TEXTE -> IMAGE
+     */
+    header {
+        flex-direction: column;
+        gap: 26px;
+    }
+
     .portfolio-header-copy {
+        width: 100%;
+        max-width: 100%;
         padding: 0 15px;
+        gap: 6px; /* resserre le bloc texte pour remonter les boutons a l'ecran */
+        order: 1;
+    }
+
+    .portfolio-header-portrait {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: none;
+        margin-top: 12px;
+        order: 2;
+    }
+
+    .portfolio-header-portrait img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
     }
     .header-actions {
         flex-direction: column;
         align-items: stretch;
+        margin-top: 6px;
     }
     .btn {
         width: 100%;
