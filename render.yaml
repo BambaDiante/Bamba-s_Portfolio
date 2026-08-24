@@ -37,7 +37,7 @@ services:
 
   # 2. Le Frontend (React en site statique)
   - type: web
-    name: bambadiante-frontend
+    name: bambadiante
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
