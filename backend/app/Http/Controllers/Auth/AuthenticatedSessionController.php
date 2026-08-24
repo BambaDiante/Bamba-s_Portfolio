@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
-     * On ne passe plus par la session, on renvoie un token Bearer.
+     * Le token est renvoyé via un cookie httpOnly, jamais dans le body JSON.
      */
     public function store(LoginRequest $request)
     {
@@ -20,26 +20,33 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user();
 
-        // Optionnel mais recommandé : supprime les anciens tokens du même appareil
-        // pour éviter d'en accumuler à chaque login.
+        // Supprime les anciens tokens du même appareil pour ne pas en accumuler
         $user->tokens()->where('name', 'frontend')->delete();
 
         $token = $user->createToken('frontend')->plainTextToken;
 
-        return response()->json([
-            'token' => $token,
-            'user'  => $user,
-        ]);
+        $cookie = cookie(
+            name: 'auth_token',
+            value: $token,
+            minutes: 60 * 24 * 7,   // 7 jours, ajuste selon ton besoin
+            path: '/',
+            domain: null,            // host-only, pas de partage cross-subdomain
+            secure: true,
+            httpOnly: true,
+            raw: false,
+            sameSite: 'none',
+        );
+
+        return response()->json(['user' => $user])->withCookie($cookie);
     }
 
     /**
      * Destroy an authenticated session.
-     * On révoque uniquement le token utilisé pour cette requête.
      */
     public function destroy(Request $request): Response
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->noContent();
+        return response()->noContent()->withCookie(Cookie::forget('auth_token'));
     }
 }

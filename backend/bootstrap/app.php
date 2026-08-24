@@ -17,7 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
         ]);
 
-        // statefulApi() retiré : on est en pur Bearer token, plus besoin du mode SPA/cookie/CSRF
+        // Lit le cookie httpOnly et le convertit en header Bearer
+        // avant que les routes API ne soient traitées.
+        $middleware->api(prepend: [
+            \App\Http\Middleware\AuthenticateFromCookie::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

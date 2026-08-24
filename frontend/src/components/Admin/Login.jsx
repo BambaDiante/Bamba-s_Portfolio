@@ -22,7 +22,7 @@ function Login() {
 
     try {
         const response = await api.post('/login', form);
-        localStorage.setItem('auth_token', response.data.token); // <-- la ligne qui manquait
+        
         navigate('/admin/dashboard');
     } catch (requestError) {
         setError(requestError.response?.data?.message ?? 'Connexion impossible.');
