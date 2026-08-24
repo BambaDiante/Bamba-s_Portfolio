@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import api, { getCsrfCookie } from '../../services/api';
+// import api, { getCsrfCookie } from '../../services/api';
 
 export default function CreateProjet() {
     const [skills, setSkills] = useState([]);
@@ -95,7 +95,7 @@ export default function CreateProjet() {
         form.skills.forEach(skillId => formData.append('skills[]', skillId));
 
         try {
-            await getCsrfCookie();
+            // await getCsrfCookie();
             const response = await api.post('/admin/create/project', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
@@ -124,7 +124,7 @@ export default function CreateProjet() {
         formData.append('_method', 'PUT');
 
         try {
-            await getCsrfCookie();
+            // await getCsrfCookie();
             const response = await api.post(`/admin/project/${editingProject.id}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
@@ -160,7 +160,7 @@ export default function CreateProjet() {
         if (!confirmed) return;
 
         try {
-            await getCsrfCookie();
+            // await getCsrfCookie();
             await api.delete(`/admin/project/${projectId}`);
             setProjects(currentProjects => currentProjects.filter(project => project.id !== projectId));
             alert('Projet supprimé avec succès !');

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import api, { getCsrfCookie } from '../../services/api';
+// import api, { getCsrfCookie } from '../../services/api';
 
 function Login() {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Login() {
         setIsSubmitting(true);
 
         try {
-            await getCsrfCookie();
+            // await getCsrfCookie();
             await api.post('/login', form);
             navigate('/admin/dashboard');
         } catch (requestError) {
