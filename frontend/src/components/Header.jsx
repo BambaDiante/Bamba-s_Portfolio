@@ -1,12 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes,Link } from 'react-router-dom'
 import profilImage from '../assets/profil.png'
+import Reveal from './Reveal'
 
 
 function Header(){
     return (
         <div>
             <header className="portfolio-header">
-                <div className="portfolio-header-copy">
+                <Reveal as="div" className="portfolio-header-copy" direction="left">
                     <h1 className='role'>Développeur FullStack</h1>
                     <h3>Ahmadou Bamba Diante</h3>
                     <p className="intro">
@@ -25,10 +26,10 @@ function Header(){
                             Me contacter
                         </Link>
                     </div>
-                </div>
-                <div className="portfolio-header-portrait">
+                </Reveal>
+                <Reveal as="div" className="portfolio-header-portrait" direction="right" delay={150}>
                     <img src={profilImage} alt="Photo de profil de Bamba Diante" className="profile-image" />
-                </div>
+                </Reveal>
             </header>
         </div>
     )

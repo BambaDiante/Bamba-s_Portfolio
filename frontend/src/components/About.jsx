@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import Reveal from './Reveal';
 
 function About(){
     const [bio,setbio]=useState('');
@@ -17,13 +18,13 @@ function About(){
     }, []);
 
      return (
-            <section>
+            <Reveal as="section">
                 <h2>A propos de moi</h2>
                 <p className='bio'>
                     {bio}
                 </p>
                 <br />
-            </section>
+            </Reveal>
         )
 
 }

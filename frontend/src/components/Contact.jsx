@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
+import Reveal from './Reveal';
 
 
 function Contact() {
@@ -49,7 +50,7 @@ function Contact() {
     }
     return (
         <main className="contact-section">
-            <div className="contact-heading">
+            <Reveal as="div" className="contact-heading">
                 <h2>Contact</h2>
                 <h3>
                     Un projet en tête ?
@@ -59,8 +60,8 @@ function Contact() {
                     Vous avez une idée, un projet ou un besoin spécifique ?
                     Décrivez-moi votre projet et je vous répondrai rapidement.
                 </p>
-            </div>
-            <div className="contact-card">
+            </Reveal>
+            <Reveal as="div" className="contact-card" delay={150}>
                 <form
                     className="contact-form"
                     onSubmit={handleSubmit}
@@ -164,7 +165,7 @@ function Contact() {
                         </button>
                     </div>
                 </form>
-            </div>
+            </Reveal>
         </main>
     );
 }

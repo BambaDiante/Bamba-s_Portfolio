@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Clock3, GraduationCap } from 'lucide-react';
 import api from '../services/api';
+import Reveal from './Reveal';
 
 console.log("NOUVEAU PARCOURS CHARGE");
 
@@ -40,10 +41,12 @@ function Parcours() {
                 <p>Aucune expérience disponible pour le moment.</p>
             )}
             <div className="parcours-list">
-                {parcours.map((experience) => (
-                    <article
+                {parcours.map((experience, index) => (
+                    <Reveal
+                        as="article"
                         key={experience.id}
                         className="parcours-card"
+                        delay={index * 100}
                     >
                         <div className="parcours-card-header">
                             <div className="parcours-icon">
@@ -67,7 +70,7 @@ function Parcours() {
                                 {experience.description}
                             </p>
                         </div>
-                    </article>
+                    </Reveal>
                 ))}
             </div>
             <br />

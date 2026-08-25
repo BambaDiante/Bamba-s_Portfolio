@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import Reveal from './Reveal';
 
 
 function Projet() {
@@ -33,7 +34,7 @@ function Projet() {
 
             {projects.length > 0 && (
                 <div className="project-grid">
-                    {projects.map((project) => {
+                    {projects.map((project, index) => {
                         const title = project.title ?? project.nom ?? 'Projet sans titre';
                         const imagePath = project.image_path ?? project.projects_image;
                         
@@ -52,7 +53,13 @@ function Projet() {
                         }
 
                         return (
-                            <article className="project-card" key={project.id}>
+                            <Reveal
+                                as="article"
+                                className="project-card"
+                                direction="zoom"
+                                delay={index * 100}
+                                key={project.id}
+                            >
                                 <div className="project-visual">
                                     {image ? (
                                         <img src={image} alt={`Aperçu de ${title}`} />
@@ -91,7 +98,7 @@ function Projet() {
                                         )}
                                     </div>
                                 </div>
-                            </article>
+                            </Reveal>
                         );
                     })}
                 </div>

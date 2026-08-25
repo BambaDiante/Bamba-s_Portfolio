@@ -1,0 +1,45 @@
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    will-change: opacity, transform;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* variante : glissement latéral, utile pour le header (texte / portrait) */
+.reveal-left {
+    transform: translateX(-32px);
+}
+.reveal-left.reveal-visible {
+    transform: translateX(0);
+}
+
+.reveal-right {
+    transform: translateX(32px);
+}
+.reveal-right.reveal-visible {
+    transform: translateX(0);
+}
+
+/* variante : léger zoom, sympa pour les cartes / images */
+.reveal-zoom {
+    transform: scale(0.94);
+}
+.reveal-zoom.reveal-visible {
+    transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-zoom {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+}

@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 
 import api from '../services/api';
+import Reveal from './Reveal';
 
 function Competences() {
     const [categories, setCategories] = useState([]);
@@ -133,7 +134,7 @@ function Competences() {
             {categories.length > 0 && (
                 <div className="skills-grid">
 
-                    {categories.map((category) => {
+                    {categories.map((category, index) => {
 
                         const categoryName =
                             category.name ??
@@ -141,8 +142,11 @@ function Competences() {
                             'Compétences';
 
                         return (
-                            <article
+                            <Reveal
+                                as="article"
                                 className="skills-category"
+                                direction="zoom"
+                                delay={index * 100}
                                 key={category.id}
                             >
 
@@ -196,7 +200,7 @@ function Competences() {
 
                                 </div>
 
-                            </article>
+                            </Reveal>
                         );
                     })}
 
