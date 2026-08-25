@@ -31,6 +31,7 @@ function Header(){
                     <img src={profilImage} alt="Photo de profil de Bamba Diante" className="profile-image" />
                 </Reveal>
             </header>
+            <br />
         </div>
     )
 }
