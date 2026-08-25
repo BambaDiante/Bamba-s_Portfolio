@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+
 
 class Project extends Model
 {
@@ -25,5 +27,11 @@ class Project extends Model
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class)->orderBy('sort_order');
+    }
+
+
+    public function getProjectsImageAttribute($value)
+    {
+        return $value ? Storage::disk('s3')->url($value) : null;
     }
 }

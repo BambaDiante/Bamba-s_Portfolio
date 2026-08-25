@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-    baseURL: "https://bambadiante-backend.onrender.com/api",
-    withCredentials: true, // indispensable : envoie le cookie httpOnly à chaque requête
+    baseURL: `${apiUrl}/api`,
+    withCredentials: true,
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -10,6 +12,12 @@ const api = axios.create({
 });
 
 export default api;
+
+export function getCsrfCookie() {
+    return axios.get(`${apiUrl}/sanctum/csrf-cookie`, {
+        withCredentials: true,
+    });
+}
 
 export function login(email, password) {
     return api.post("/login", { email, password }).then((res) => res.data.user);

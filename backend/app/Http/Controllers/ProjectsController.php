@@ -29,9 +29,10 @@ class ProjectsController extends Controller
         if ($request->hasFile('project_image')) {
             $file = $request->file('project_image');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('projects', $filename, 'public');
-            // Optionnel : stocker le chemin relatif, mais assurez-vous de l'utiliser correctement côté React
-            $imagePath = asset('storage/' . $path);
+            // On stocke le chemin relatif uniquement, jamais l'URL complète.
+            // L'URL publique est reconstruite dynamiquement via l'accessor
+            // getProjectsImageAttribute() dans le modèle Project.
+            $imagePath = $file->storeAs('projects', $filename, 's3');
         }
 
         // On transforme le stack en tableau pour correspondre à un champ JSON
@@ -41,7 +42,7 @@ class ProjectsController extends Controller
             'nom' => $validated['nom'],
             'description' => $validated['description'],
             'projects_image' => $imagePath,
-            'stack' => $stackData, // Enregistré proprement pour le format JSON
+            'stack' => $stackData,
         ]);
 
         if (!empty($validated['skills'])) {
@@ -71,20 +72,19 @@ class ProjectsController extends Controller
             'skills.*' => 'exists:skills,id'
         ]);
 
-        $imagePath = $project->projects_image;
+        // On lit l'attribut brut (chemin relatif en base), pas l'accessor transformé
+        $imagePath = $project->getRawOriginal('projects_image');
 
         if ($request->hasFile('project_image')) {
             // Supprime l'ancienne image si elle existe, pour ne pas accumuler
-            // des fichiers orphelins sur le disque.
-            if ($project->projects_image) {
-                $oldPath = str_replace('/storage/', '', $project->projects_image);
-                Storage::disk('public')->delete($oldPath);
+            // des fichiers orphelins sur le bucket.
+            if ($imagePath) {
+                Storage::disk('s3')->delete($imagePath);
             }
 
             $file = $request->file('project_image');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('projects', $filename, 'public');
-            $imagePath = '/storage/' . $path;
+            $imagePath = $file->storeAs('projects', $filename, 's3');
         }
 
         $project->update([
@@ -110,9 +110,10 @@ class ProjectsController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        if ($project->projects_image) {
-            $oldPath = str_replace('/storage/', '', $project->projects_image);
-            Storage::disk('public')->delete($oldPath);
+        $imagePath = $project->getRawOriginal('projects_image');
+
+        if ($imagePath) {
+            Storage::disk('s3')->delete($imagePath);
         }
 
         $project->skills()->detach();

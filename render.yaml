@@ -35,6 +35,22 @@ services:
         fromDatabase:
           name: bambadiante-db
           property: connectionString
+      - key: FILESYSTEM_DISK
+        value: s3
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        value: auto
+      - key: AWS_BUCKET
+        value: bambadiante-uploads
+      - key: AWS_ENDPOINT
+        value: https://501fee40607ec3633638a315aea8d018.r2.cloudflarestorage.com
+      - key: AWS_URL
+        value: https://pub-4457a8b41b7b4ee389a380a2f38fcab6.r2.dev
+      - key: AWS_USE_PATH_STYLE_ENDPOINT
+        value: "true"
 
   # 2. Le Frontend (React en site statique)
   - type: web

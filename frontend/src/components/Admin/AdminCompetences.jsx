@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import api from '../../services/api';
+import api,{ getCsrfCookie } from '../../services/api';
 import { Pencil, Trash2 } from 'lucide-react';
 
 export default function CompetencesAdmin() {
@@ -64,7 +64,7 @@ export default function CompetencesAdmin() {
         setError('');
 
         try {
-            // await getCsrfCookie();
+            await getCsrfCookie();
 
             if (editingCategory) {
                 const response = await api.put(`/admin/category/${editingCategory.id}`, {
@@ -101,7 +101,7 @@ export default function CompetencesAdmin() {
         if (!confirmed) return;
 
         try {
-            // await getCsrfCookie();
+            await getCsrfCookie();
             await api.delete(`/admin/category/${category.id}`);
             setCategories(currentCategories =>
                 currentCategories.filter(item => item.id !== category.id)
@@ -155,7 +155,7 @@ export default function CompetencesAdmin() {
         setError('');
 
         try {
-            // await getCsrfCookie();
+            await getCsrfCookie();
 
             if (editingSkill) {
                 const response = await api.put(`/admin/skill/${editingSkill.id}`, skillForm);
@@ -207,7 +207,7 @@ export default function CompetencesAdmin() {
         if (!confirmed) return;
 
         try {
-            // await getCsrfCookie();
+            await getCsrfCookie();
             await api.delete(`/admin/skill/${skill.id}`);
             setCategories(currentCategories =>
                 currentCategories.map(category => ({
