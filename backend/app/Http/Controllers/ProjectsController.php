@@ -31,7 +31,7 @@ class ProjectsController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('projects', $filename, 'public');
             // Optionnel : stocker le chemin relatif, mais assurez-vous de l'utiliser correctement côté React
-            $imagePath = '/storage/' . $path;
+            $imagePath = asset('storage/' . $path);
         }
 
         // On transforme le stack en tableau pour correspondre à un champ JSON
