@@ -16,6 +16,11 @@ Route::get('/competences', [CompetenceController::class, 'index']);
 Route::get('/about', [AdminController::class, 'getbio']);
 Route::get('/parcours', [AdminController::class, 'getparcours']);
 Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok'
+    ]);
+});
 
 // Utiliser 'auth:sanctum' au lieu de 'auth' pour les routes API SPA
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
@@ -37,11 +42,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     //Test
 
-    Route::get('/health', function () {
-    return response()->json([
-        'status' => 'ok'
-    ]);
-});
+
 
 });
 
