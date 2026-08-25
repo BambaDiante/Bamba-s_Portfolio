@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
 import Reveal from './Reveal';
+import api,{getCsrfCookie} from '../services/api.js';
 
 
 function Contact() {
@@ -26,7 +27,7 @@ function Contact() {
         setSuccess('');
         setIsSend(true);
         try {
-            
+            await getCsrfCookie();
             await api.post('/contact', form);
             setSuccess(
                 'Votre message a bien été envoyé. Je vous répondrai dans les meilleurs délais.'
