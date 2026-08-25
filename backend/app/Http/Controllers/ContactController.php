@@ -32,4 +32,10 @@ class ContactController extends Controller
         $message=Message::all();
         return response()->json($message,200);
     }
+
+    public function destroy($id)
+    {
+        Message::findOrFail($id)->delete();
+        return response()->json(['message' => 'Message supprimé.'], 200);
+    }
 }

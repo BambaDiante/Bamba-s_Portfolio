@@ -40,10 +40,9 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::put('/skill/{id}', [CompetenceController::class, 'updateSkill']);
     Route::delete('/skill/{id}', [CompetenceController::class, 'destroySkill']);
 
-    //Test
-
-
-
+    // Messages
+    Route::get('/messages', [ContactController::class, 'getMessage']);
+    Route::delete('/messages/{id}', [ContactController::class, 'destroy']);
 });
 
 require __DIR__.'/auth.php';
