@@ -36,10 +36,9 @@ function Projet() {
                 <div className="project-grid">
                     {projects.map((project, index) => {
                         const title = project.title ?? project.nom ?? 'Projet sans titre';
-                        const imagePath = project.image_path ?? project.projects_image;
+                        // const imagePath = project.image_path ?? project.projects_image;
                         
-                        // URL de l'image (ajustez http://localhost:8000 selon votre environnement Docker)
-                        const image = imagePath ? `http://localhost:8000${imagePath}` : null;
+                        const image = project.image_path ?? project.projects_image ?? null;
 
                         const skills = project.skills ?? [];
                         
