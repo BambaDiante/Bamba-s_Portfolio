@@ -5,12 +5,13 @@ services:
       dockerfile: docker/Dockerfile
     ports:
       - "8000:8000"
-    environment:
-      DB_CONNECTION: sqlite
-      DB_DATABASE: /backend/database/database.sqlite
+    env_file:
+      - ./backend/.env
     volumes:
       - ./backend:/backend
       - backend_vendor:/backend/vendor
+    depends_on:
+      - db
 
   frontend:
     build:
@@ -23,6 +24,34 @@ services:
     depends_on:
       - backend
 
+  db:
+    image: postgres:18
+    container_name: postgres
+    environment:
+      POSTGRES_DB: bambadiante
+      POSTGRES_USER: bambadiante
+      POSTGRES_PASSWORD: monmotdepassefort
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mbacke@admin.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword  
+    ports:
+      - "5051:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    restart: unless-stopped
+
 volumes:
   backend_vendor:
   frontend_node_modules:
+  pgdata:            
+  pgdata_data:        
+  pgadmin_data:

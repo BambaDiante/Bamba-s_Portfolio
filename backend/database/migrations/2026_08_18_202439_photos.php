@@ -23,6 +23,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('photos');
+        Schema::table('projects', function (Blueprint $table) {
+            // Note: On ne peut pas supprimer un $table->id() facilement avec dropColumn, 
+            // mais comme 'projects' a déjà sa propre table de base, on supprime les colonnes ajoutées :
+            $table->dropColumn(['nom', 'description', 'projects_image', 'stack']);
+            
+            // Si l'id a été recréé par erreur en tant que colonne supplémentaire :
+            // $table->dropColumn('id');
+        });
     }
 };
